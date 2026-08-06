@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discovery MAX NBF & DALPA - Plataforma Neurocognitiva</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#090d16',
+                        darkcard: '#111827',
+                        lightbg: '#f8fafc',
+                        lightcard: '#ffffff',
+                        nbfcyan: '#06b6d4',
+                        nbfviolet: '#8b5cf6',
+                        nbfemerald: '#10b981',
+                        nbfamber: '#f59e0b',
+                        nbfrose: '#ec4899'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .glass {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .light .glass {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
+        }
+        .glow-violet {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-darkbg text-slate-100 dark:bg-darkbg dark:text-slate-100 light:bg-lightbg light:text-slate-800">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 glass transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2.5 bg-gradient-to-tr from-nbfviolet to-nbfcyan rounded-xl shadow-lg">
+                        <i class="fa-solid fa-brain text-white text-2xl animate-pulse"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-nbfcyan to-nbfviolet">DISCOVERY MAX</span>
+                        <span class="block text-xs font-semibold tracking-widest text-slate-400 dark:text-slate-400 light:text-slate-500">NEURAL EDUCATION</span>
+                    </div>
+                </div>
+
+                <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#paradigma" class="hover:text-nbfcyan transition dark:text-slate-300 light:text-slate-600">Paradigma NBF</a>
+                    <a href="#elementos" class="hover:text-nbfcyan transition dark:text-slate-300 light:text-slate-600">7 Elementos</a>
+                    <a href="#ecuaciones" class="hover:text-nbfcyan transition dark:text-slate-300 light:text-slate-600">Ecuaciones Brújula</a>
+                    <a href="#simulador" class="text-nbfcyan border-b-2 border-nbfcyan pb-1">Simulador Cognitivo</a>
+                    <a href="#neurobiologia" class="hover:text-nbfcyan transition dark:text-slate-300 light:text-slate-600">Neurobiología</a>
+                </nav>
+
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2.5 rounded-xl border border-slate-700/50 dark:border-slate-800 light:border-slate-300 hover:bg-slate-800/30 transition-all">
+                        <i id="themeIcon" class="fa-solid fa-sun text-yellow-400 text-lg"></i>
+                    </button>
+                    <a href="#simulador" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-nbfcyan to-nbfviolet text-white hover:opacity-90 transition shadow-lg shadow-nbfcyan/10">
+                        ¡Iniciar Reto! <i class="fa-solid fa-bolt ml-2 text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden py-24 px-4 sm:px-6 lg:px-8 border-b border-slate-800/40 dark:border-slate-800/40 light:border-slate-200">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.1),transparent_50%)]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(139,92,246,0.08),transparent_50%)]"></div>
+        
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-nbfviolet/10 text-nbfviolet border border-nbfviolet/20 mb-6">
+                <i class="fa-solid fa-wand-magic-sparkles mr-2 animate-bounce"></i> Fusión DALPA Neural Tech + Método NBF
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-black tracking-tight mb-8">
+                El fin de la <span class="bg-clip-text text-transparent bg-gradient-to-r from-nbfcyan via-nbfviolet to-nbfrose">memorización mecánica</span>. Bienvenido a la Certeza.
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-400 dark:text-slate-400 light:text-slate-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+                Hackea tu mente y asimila el inglés de forma intuitiva. Combinamos los <strong>Flexores Cognitivos de DALPA</strong> con el disruptivo <strong>Método NBF de Toño Vicas</strong> para desmantelar la sordera fonética y entrenar tu cerebro en milisegundos.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#simulador" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-2xl text-base font-bold bg-gradient-to-r from-nbfcyan to-nbfviolet text-white hover:scale-[1.02] transition duration-300 shadow-xl shadow-nbfcyan/15">
+                    Entrar al Simulador NBF <i class="fa-solid fa-play ml-3 text-sm"></i>
+                </a>
+                <a href="#paradigma" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-2xl text-base font-bold border border-slate-700/50 hover:bg-slate-800/30 dark:border-slate-800 light:border-slate-300 light:hover:bg-slate-100 transition duration-300">
+                    Descubrir la Ciencia
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Paradigma Disruptivo -->
+    <section id="paradigma" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">El Postulado Científico Disruptivo</h2>
+            <p class="text-slate-400 dark:text-slate-400 light:text-slate-500">¿Por qué tu cerebro se paraliza al intentar hablar inglés? No es falta de talento, es un glitch de decodificación profunda.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 items-stretch">
+            <div class="p-8 sm:p-10 rounded-3xl glass border border-slate-800/50 dark:border-slate-800/50 light:border-slate-200 glow-cyan flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-nbfcyan/10 flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-circle-xmark text-nbfcyan text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">La Trampa del "Según el Contexto"</h3>
+                    <p class="text-slate-400 dark:text-slate-400 light:text-slate-600 leading-relaxed mb-6">
+                        La muletilla pedagógica tradicional afirma que todo depende "del contexto". Para la neurociencia, esto es una aberración. Tu cerebro <strong>no puede adivinar el contexto y hablar al mismo tiempo</strong> en milisegundos; esa sobrecarga cognitiva es lo que causa la parálisis, el bloqueo y la pena.
+                    </p>
+                </div>
+                <div class="border-t border-slate-800/50 dark:border-slate-800/50 light:border-slate-200 pt-6">
+                    <span class="text-sm font-semibold text-nbfcyan"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Error: Sobrecarga en Funciones Ejecutivas</span>
+                </div>
+            </div>
+
+            <div class="p-8 sm:p-10 rounded-3xl glass border border-slate-800/50 dark:border-slate-800/50 light:border-slate-200 glow-violet flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-nbfviolet/10 flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-bolt text-nbfviolet text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">"Los Verbos en Inglés No Existen"</h3>
+                    <p class="text-slate-400 dark:text-slate-400 light:text-slate-600 leading-relaxed mb-6">
+                        El español se basa en conjugaciones complejas de verbos (terminados en <em>-ar, -er, -ir</em>). El inglés no tiene verbos innatos; opera bajo una <strong>arquitectura de posicionamiento de Lego</strong>. Lo que llamas "verbos" son bases estructurales o sustantivos funcionales activados por determinadores externos. ¡Al posicionar en vez de traducir, liberas la memoria de trabajo!
+                    </p>
+                </div>
+                <div class="border-t border-slate-800/50 dark:border-slate-800/50 light:border-slate-200 pt-6">
+                    <span class="text-sm font-semibold text-nbfviolet"><i class="fa-solid fa-brain mr-2"></i> Solución: Posicionamiento Matemático de Elementos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Los 7 Elementos Determinantes -->
+    <section id="elementos" class="py-24 bg-slate-900/30 dark:bg-slate-900/30 light:bg-slate-100 border-y border-slate-800/40 dark:border-slate-800/40 light:border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-sm font-bold text-nbfcyan tracking-widest uppercase">El Nuevo Sistema Operativo</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-2 mb-4">Los 7 Elementos Lingüísticos Clave</h2>
+                <p class="text-slate-400 dark:text-slate-400 light:text-slate-500">Deja de lado la gramática tradicional. Domina los siete bloques matemáticos y arma cualquier idea en inglés de manera intuitiva.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 rounded-2xl bg-slate-900 dark:bg-slate-900 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-200 hover:border-nbfcyan/30 hover:-translate-y-1 transition duration-300">
+                    <div class="text-xs font-bold text-slate-500 dark:text-slate-500 light:text-slate-400 mb-2">Elemento 01</div>
+                    <h4 class="text-lg font-bold text-slate-100 dark:text-slate-100 light:text-slate-800 mb-2">Pronombres Personales</h4>
+                    <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Sujetos directos. Son los activadores lógicos de la estructura.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-900 dark:bg-slate-900 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-200 hover:border-nbfviolet/30 hover:-translate-y-1 transition duration-300">
+                    <div class="text-xs font-bold text-slate-500 dark:text-slate-500 light:text-slate-400 mb-2">Elemento 02</div>
+                    <h4 class="text-lg font-bold text-slate-100 dark:text-slate-100 light:text-slate-800 mb-2">Sustantivos (Nouns)</h4>
+                    <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">El núcleo del inglés. Objetos, nociones y seres vivos reconvertibles.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-900 dark:bg-slate-900 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-200 hover:border-nbfemerald/30 hover:-translate-y-1 transition duration-300">
+                    <div class="text-xs font-bold text-slate-500 dark:text-slate-500 light:text-slate-400 mb-2">Elemento 03</div>
+                    <h4 class="text-lg font-bold text-slate-100 dark:text-slate-100 light:text-slate-800 mb-2">Preposiciones</h4>
+                    <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Relaciones lógicas y espaciales. Indican estado y superposición.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-900 dark:bg-slate-900 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-200 hover:border-nbfamber/30 hover:-translate-y-1 transition duration-300">
+                    <div class="text-xs font-bold text-slate-500 dark:text-slate-500 light:text-slate-400 mb-2">Elemento 04</div>
+                    <h4 class="text-lg font-bold text-slate-100 dark:text-slate-100 light:text-slate-800 mb-2">Adjetivos</h4>
+                    <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Atributos y etiquetas descriptivas aplicables a los sustantivos.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-900 dark:bg-slate-900 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-200 hover:border-nbfrose/30 hover:-translate-y-1 transition duration-300">
+                    <div class="text-xs font-bold text-slate-500 dark:text-slate-500 light:text-slate-400 mb-2">Elemento 05</div>
+                    <h4 class="text-lg font-bold text-slate-100 dark:text-slate-100 light:text-slate-800 mb-2">Adverbios</h4>
+                    <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Modificadores que brindan dinamismo y velocidad a la acción.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-900 dark:bg-slate-900 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-200 hover:border-nbfcyan/30 hover:-translate-y-1 transition duration-300">
+                    <div class="text-xs font-bold text-slate-500 dark:text-slate-500 light:text-slate-400 mb-2">Elemento 06</div>
+                    <h4 class="text-lg font-bold text-slate-100 dark:text-slate-100 light:text-slate-800 mb-2">Palabras Auxiliares</h4>
+                    <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Conversores gramaticales. Suplementos lógicos vitalicios.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-900 dark:bg-slate-900 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-200 hover:border-nbfviolet/30 hover:-translate-y-1 transition duration-300">
+                    <div class="text-xs font-bold text-slate-500 dark:text-slate-500 light:text-slate-400 mb-2">Elemento 07</div>
+                    <h4 class="text-lg font-bold text-slate-100 dark:text-slate-100 light:text-slate-800 mb-2">Palabras Modales</h4>
+                    <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Expresiones de posibilidad o necesidad absoluta sin verbos naturales.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-gradient-to-tr from-nbfcyan/10 to-nbfviolet/10 border-2 border-dashed border-nbfcyan/40 flex flex-col justify-center items-center text-center">
+                    <i class="fa-solid fa-puzzle-piece text-3xl text-nbfcyan mb-3 animate-bounce"></i>
+                    <h4 class="font-bold text-slate-100 dark:text-slate-100 light:text-slate-800">Construcción Modular</h4>
+                    <p class="text-xs text-slate-400 dark:text-slate-400 light:text-slate-500 mt-1">¡Como un juego de bloques de Lego!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Las 3 Ecuaciones Brújula -->
+    <section id="ecuaciones" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-sm font-bold text-nbfviolet tracking-widest uppercase">Mapas Mentales de Orientación</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold mt-2 mb-4">Las Ecuaciones Brújula</h2>
+            <p class="text-slate-400 dark:text-slate-400 light:text-slate-500">Tres leyes cognitivas inviolables para guiar tu mente racional y erradicar bloqueos inmediatos.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="p-8 rounded-3xl glass border border-slate-800/40 dark:border-slate-800/40 light:border-slate-200 text-center hover:scale-[1.01] transition duration-300">
+                <div class="w-14 h-14 rounded-2xl bg-nbfcyan/10 mx-auto flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-right-left text-nbfcyan text-2xl"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-400 dark:text-slate-400 light:text-slate-500 uppercase tracking-wider block mb-2">Primera Ecuación</span>
+                <h4 class="text-lg font-black mb-4">ESP = Verbo | ENG = Sustantivo</h4>
+                <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600 leading-relaxed">
+                    El español se centra en la acción dinámica. El inglés en la precisión nominal. Transiciona del concepto abstracto a la concreción del nombre.
+                </p>
+            </div>
+
+            <div class="p-8 rounded-3xl glass border border-slate-800/40 dark:border-slate-800/40 light:border-slate-200 text-center hover:scale-[1.01] transition duration-300">
+                <div class="w-14 h-14 rounded-2xl bg-nbfviolet/10 mx-auto flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-magnifying-glass-chart text-nbfviolet text-2xl"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-400 dark:text-slate-400 light:text-slate-500 uppercase tracking-wider block mb-2">Segunda Ecuación</span>
+                <h4 class="text-lg font-black mb-4">No Traducir. Definir para Interpretar</h4>
+                <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600 leading-relaxed">
+                    La traducción literal es una trampa. El inglés opera por definiciones precisas. Ej. <em>book</em> no significa "libro", define "hojas comprimidas con un lomo".
+                </p>
+            </div>
+
+            <div class="p-8 rounded-3xl glass border border-slate-800/40 dark:border-slate-800/40 light:border-slate-200 text-center hover:scale-[1.01] transition duration-300">
+                <div class="w-14 h-14 rounded-2xl bg-nbfemerald/10 mx-auto flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-glasses text-nbfemerald text-2xl"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-400 dark:text-slate-400 light:text-slate-500 uppercase tracking-wider block mb-2">Tercera Ecuación</span>
+                <h4 class="text-lg font-black mb-4">Pensamiento Lógico y Crítico</h4>
+                <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600 leading-relaxed">
+                    Aplica la lógica a las dos premisas anteriores. Entiende con precisión matemática el mensaje que quieres expresar sin memorizaciones inútiles.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIMULADOR COGNITIVO NBF (EL MASTERPIECE) -->
+    <section id="simulador" class="py-24 bg-gradient-to-b from-darkbg via-slate-950 to-darkbg dark:from-darkbg dark:via-slate-950 dark:to-darkbg light:from-lightbg light:via-slate-50 light:to-lightbg border-y border-slate-800/40 dark:border-slate-800/40 light:border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-nbfcyan/10 text-nbfcyan border border-nbfcyan/20 mb-3 uppercase tracking-wider">
+                    <i class="fa-solid fa-gauge-high mr-2 animate-spin-slow"></i> Simulador de Lectura Cognitiva NBF
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-black mb-4">Entrenador Ocular & Neural Bilingüe</h2>
+                <p class="text-slate-400 dark:text-slate-400 light:text-slate-500">
+                    Fusión disruptiva: erradica la subvocalización y las regresiones leyendo <strong>renglones sintácticos completos</strong> a velocidades exponenciales con coloración neurocognitiva integrada.
+                </p>
+            </div>
+
+            <!-- Dashboard Simulator Frame -->
+            <div class="max-w-4xl mx-auto rounded-3xl glass border border-slate-700/50 dark:border-slate-800 light:border-slate-300 overflow-hidden shadow-2xl shadow-nbfcyan/5">
+                
+                <!-- Interface Control Top -->
+                <div class="p-6 bg-slate-950/80 dark:bg-slate-950/80 light:bg-slate-100 border-b border-slate-800 dark:border-slate-800 light:border-slate-200 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-3.5 h-3.5 rounded-full bg-red-500 inline-block"></span>
+                        <span class="w-3.5 h-3.5 rounded-full bg-yellow-500 inline-block"></span>
+                        <span class="w-3.5 h-3.5 rounded-full bg-green-500 inline-block"></span>
+                        <span class="text-xs font-mono text-slate-400 dark:text-slate-400 light:text-slate-500 ml-2">NBF_ENGINE_v2.6_ACTIVE</span>
+                    </div>
+                    <!-- Quick Presets -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button onclick="loadPreset(0)" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-nbfcyan/10 text-nbfcyan border border-nbfcyan/20 hover:bg-nbfcyan/20 transition">El Hogar</button>
+                        <button onclick="loadPreset(1)" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-nbfviolet/10 text-nbfviolet border border-nbfviolet/20 hover:bg-nbfviolet/20 transition">Deportes</button>
+                        <button onclick="loadPreset(2)" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-nbfemerald/10 text-nbfemerald border border-nbfemerald/20 hover:bg-nbfemerald/20 transition">La Ciudad</button>
+                    </div>
+                </div>
+
+                <!-- MAIN FLASHING PANEL -->
+                <div class="py-28 px-8 text-center bg-slate-950/40 dark:bg-slate-950/40 light:bg-slate-50 relative min-h-[340px] flex flex-col justify-center items-center">
+                    
+                    <!-- Peripheral Alignment Guidelines -->
+                    <div class="absolute left-12 top-0 bottom-0 border-l border-dashed border-slate-800 dark:border-slate-800 light:border-slate-200 flex flex-col justify-between py-6">
+                        <span class="text-[9px] font-mono text-slate-600 dark:text-slate-600 light:text-slate-400 tracking-wider">MARGEN PERIFÉRICO</span>
+                        <span class="text-[9px] font-mono text-slate-600 dark:text-slate-600 light:text-slate-400 tracking-wider">IZQUIERDO</span>
+                    </div>
+                    <div class="absolute right-12 top-0 bottom-0 border-r border-dashed border-slate-800 dark:border-slate-800 light:border-slate-200 flex flex-col justify-between py-6">
+                        <span class="text-[9px] font-mono text-slate-600 dark:text-slate-600 light:text-slate-400 tracking-wider">MARGEN PERIFÉRICO</span>
+                        <span class="text-[9px] font-mono text-slate-600 dark:text-slate-600 light:text-slate-400 tracking-wider">DERECHO</span>
+                    </div>
+
+                    <!-- Focal Center Laser -->
+                    <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-0.5 border-l border-dashed border-nbfcyan/20 pointer-events-none"></div>
+                    <div class="absolute top-4 left-1/2 -translate-x-1/2 text-[10px] font-semibold text-nbfcyan tracking-widest uppercase">Fijación Central</div>
+
+                    <!-- MAIN DYNAMIC TEXT RENDERER -->
+                    <div id="simScreen" class="text-2xl sm:text-4xl font-extrabold tracking-tight select-none max-w-xl transition-all duration-150 leading-relaxed text-slate-100 dark:text-slate-100 light:text-slate-800">
+                        Presiona <span class="text-nbfcyan font-black">INICIAR</span> para reprogramar tu velocidad visual
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="absolute bottom-0 left-0 right-0 h-1.5 bg-slate-900 dark:bg-slate-900 light:bg-slate-200">
+                        <div id="simProgress" class="h-full bg-gradient-to-r from-nbfcyan to-nbfviolet w-0 transition-all duration-100"></div>
+                    </div>
+                </div>
+
+                <!-- PANEL CONTROLS -->
+                <div class="p-8 bg-slate-950/80 dark:bg-slate-950/80 light:bg-slate-100 border-t border-slate-800 dark:border-slate-800 light:border-slate-200">
+                    
+                    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+                        
+                        <!-- Speed Control -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 dark:text-slate-400 light:text-slate-500 uppercase tracking-wider mb-2">Velocidad (PPM)</label>
+                            <div class="flex items-center space-x-2">
+                                <button onclick="adjustSpeed(-50)" class="w-10 h-10 rounded-xl border border-slate-800 dark:border-slate-800 light:border-slate-300 hover:bg-slate-800 dark:hover:bg-slate-800 light:hover:bg-slate-200 flex items-center justify-center font-bold text-lg">-</button>
+                                <span id="speedVal" class="flex-1 text-center font-mono font-bold text-lg text-nbfcyan">300</span>
+                                <button onclick="adjustSpeed(50)" class="w-10 h-10 rounded-xl border border-slate-800 dark:border-slate-800 light:border-slate-300 hover:bg-slate-800 dark:hover:bg-slate-800 light:hover:bg-slate-200 flex items-center justify-center font-bold text-lg">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Highlight System Toggle -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 dark:text-slate-400 light:text-slate-500 uppercase tracking-wider mb-2">Análisis de 7 Elementos</label>
+                            <button id="highlightToggle" onclick="toggleHighlight()" class="w-full h-10 rounded-xl bg-nbfcyan/10 text-nbfcyan border border-nbfcyan/30 hover:bg-nbfcyan/20 font-bold text-sm transition">
+                                <i class="fa-solid fa-palette mr-2"></i> Activado
+                            </button>
+                        </div>
+
+                        <!-- Chunking Mode -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 dark:text-slate-400 light:text-slate-500 uppercase tracking-wider mb-2">Modo Ocular</label>
+                            <select id="chunkSelect" onchange="changeChunkMode()" class="w-full h-10 px-3 rounded-xl bg-slate-900 dark:bg-slate-900 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-300 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-nbfcyan text-slate-100 dark:text-slate-100 light:text-slate-800">
+                                <option value="short">Renglón Corto (2-3 Palabras)</option>
+                                <option value="medium" selected>Renglón Medio (4-5 Palabras)</option>
+                                <option value="full">Oración Completa</option>
+                            </select>
+                        </div>
+
+                        <!-- Core Action Buttons -->
+                        <div class="flex items-end">
+                            <button id="playBtn" onclick="togglePlay()" class="w-full h-10 rounded-xl bg-gradient-to-r from-nbfcyan to-nbfviolet text-white font-bold text-sm shadow-lg shadow-nbfcyan/20 hover:opacity-95 transition-all">
+                                <i class="fa-solid fa-play mr-2"></i> Iniciar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Custom Text Input Panel -->
+                    <div class="border-t border-slate-800 dark:border-slate-800 light:border-slate-200 pt-6">
+                        <label class="block text-xs font-bold text-slate-400 dark:text-slate-400 light:text-slate-500 uppercase tracking-wider mb-2">Introduce tu propio texto o guión en inglés</label>
+                        <textarea id="customText" class="w-full h-24 p-4 rounded-2xl bg-slate-900/50 dark:bg-slate-900/50 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-nbfcyan text-slate-200 dark:text-slate-200 light:text-slate-700 placeholder-slate-600" placeholder="Inserta aquí tu párrafo en inglés para leerlo automáticamente por renglones completos..."></textarea>
+                    </div>
+
+                    <!-- Color Guide Legend -->
+                    <div id="colorLegend" class="mt-6 flex flex-wrap justify-center gap-4 border-t border-slate-800 dark:border-slate-800 light:border-slate-200 pt-6 text-xs font-semibold">
+                        <span class="inline-flex items-center px-2 py-1 rounded bg-nbfcyan/10 text-nbfcyan"><i class="w-2.5 h-2.5 rounded-full bg-nbfcyan mr-1.5 inline-block"></i> Pronombres (Sujeto)</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded bg-nbfviolet/10 text-nbfviolet"><i class="w-2.5 h-2.5 rounded-full bg-nbfviolet mr-1.5 inline-block"></i> Sustantivos (Nouns)</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded bg-nbfemerald/10 text-nbfemerald"><i class="w-2.5 h-2.5 rounded-full bg-nbfemerald mr-1.5 inline-block"></i> Preposiciones</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded bg-nbfamber/10 text-nbfamber"><i class="w-2.5 h-2.5 rounded-full bg-nbfamber mr-1.5 inline-block"></i> Auxiliares & Modales</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- La Neurobiología de la Fluidez -->
+    <section id="neurobiologia" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-sm font-bold text-nbfrose tracking-widest uppercase">El Respaldamiento Científico</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold mt-2 mb-4">La Neurobiología de la Fluidez</h2>
+            <p class="text-slate-400 dark:text-slate-400 light:text-slate-500">¿Qué pasa exactamente dentro del cerebro cuando aprendes con Discovery MAX?</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="p-8 rounded-3xl bg-slate-900/50 dark:bg-slate-900/50 light:bg-white border border-slate-800/60 dark:border-slate-800/60 light:border-slate-200 flex flex-col justify-between">
+                <div>
+                    <h4 class="text-xl font-bold mb-3">La Vía Dorsal del Lenguaje</h4>
+                    <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600 leading-relaxed mb-6">
+                        Es el servomecanismo neural maestro que conecta la percepción del sonido con la activación motora (el habla). Al desglosar estructuras visualmente en renglones completos, estimulamos la integración rápida sin que pase por el filtro lento de la gramática reflexiva.
+                    </p>
+                </div>
+                <div class="text-xs font-mono text-slate-500">BA 44 - BA 45 (Área de Broca)</div>
+            </div>
+
+            <div class="p-8 rounded-3xl bg-slate-900/50 dark:bg-slate-900/50 light:bg-white border border-slate-800/60 dark:border-slate-800/60 light:border-slate-200 flex flex-col justify-between">
+                <div>
+                    <h4 class="text-xl font-bold mb-3">Estudios fMRI de MIT & EvLab</h4>
+                    <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600 leading-relaxed mb-6">
+                        Estudios con resonancias magnéticas funcionales (liderados por laboratorios como el de Evelina Fedorenko en el MIT) demuestran que el cerebro activa áreas parcialmente diferentes para procesar verbos y sustantivos. NBF explota esta asimetría dándole total control a la corteza nominal.
+                    </p>
+                </div>
+                <div class="text-xs font-mono text-slate-500">Mapeo Estructural Cortical</div>
+            </div>
+
+            <div class="p-8 rounded-3xl bg-slate-900/50 dark:bg-slate-900/50 light:bg-white border border-slate-800/60 dark:border-slate-800/60 light:border-slate-200 flex flex-col justify-between">
+                <div>
+                    <h4 class="text-xl font-bold mb-3">HVPT (Ajuste Fonético)</h4>
+                    <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600 leading-relaxed mb-6">
+                        El "High Variability Phonetic Training" bombardea el sistema auditivo con variabilidad de timbres, deconstruyendo la 'Sordera Fonética' que provoca el magneto perceptual del español. La fluidez real no viene de "repetir como loro", sino de recalibrar tu mapa auditivo.
+                    </p>
+                </div>
+                <div class="text-xs font-mono text-slate-500">Filtro Estadístico del Entorno</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-brain text-2xl text-nbfcyan"></i>
+                <span class="text-sm font-extrabold text-slate-200">Discovery Max Neuroeducation Networks L.A. LLC</span>
+            </div>
+            <p class="text-xs text-center md:text-right text-slate-500">
+                &copy; 2026 Discovery MAX. Todos los derechos reservados. Basado en investigaciones neurocognitivas.
+            </p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SIMULATOR CORE LOGIC (JavaScript) -->
+    <script>
+        // Preset Texts
+        const PRESETS = [
+            "The household of the Williams family has many beautiful memories. Each object has its own unique place in the living room.",
+            "Sports require physical coordination and facial focus. Professional athletes train their cerebral pathways for automatic reflex actions.",
+            "A city in the United States offers places of interest. You can navigate the streets easily by following the logical prepositions."
+        ];
+
+        // Highlight mapping rules (Regex)
+        // NBF highlights: cyan=pronouns, violet=nouns, emerald=prepositions, amber=aux/modals
+        const CLASSIFICATIONS = {
+            pronouns: /\\b(I|you|he|she|it|we|they|my|your|his|her|its|our|their)\\b/gi,
+            nouns: /\\b(household|family|memories|object|place|room|sports|coordination|focus|athletes|pathways|actions|city|states|streets|prepositions|book|house|dog|swim|swimming|water|watch|watches)\\b/gi,
+            prepositions: /\\b(of|has|have|in|on|at|by|with|for|to|from|under|over|above|below|through|about)\\b/gi,
+            auxmodals: /\\b(is|am|are|was|were|be|been|do|does|did|done|can|could|will|would|should|may|might|must|get|gets|got)\\b/gi
+        };
+
+        let currentText = PRESETS[0];
+        let chunks = [];
+        let currentIndex = 0;
+        let isPlaying = false;
+        let speed = 300; // Words Per Minute
+        let playInterval = null;
+        let highlightEnabled = true;
+        let chunkMode = 'medium'; // short, medium, full
+
+        // Initialize Input
+        document.getElementById('customText').value = currentText;
+
+        function adjustSpeed(amount) {
+            speed = Math.max(100, Math.min(1000, speed + amount));
+            document.getElementById('speedVal').innerText = speed;
+            if (isPlaying) {
+                pause();
+                play();
+            }
+        }
+
+        function toggleHighlight() {
+            highlightEnabled = !highlightEnabled;
+            const btn = document.getElementById('highlightToggle');
+            if (highlightEnabled) {
+                btn.className = "w-full h-10 rounded-xl bg-nbfcyan/10 text-nbfcyan border border-nbfcyan/30 hover:bg-nbfcyan/20 font-bold text-sm transition";
+                btn.innerHTML = '<i class="fa-solid fa-palette mr-2"></i> Activado';
+                document.getElementById('colorLegend').classList.remove('opacity-40');
+            } else {
+                btn.className = "w-full h-10 rounded-xl bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700 font-bold text-sm transition";
+                btn.innerHTML = '<i class="fa-solid fa-palette mr-2"></i> Desactivado';
+                document.getElementById('colorLegend').classList.add('opacity-40');
+            }
+            renderCurrentChunk();
+        }
+
+        function changeChunkMode() {
+            chunkMode = document.getElementById('chunkSelect').value;
+            prepareChunks();
+            reset();
+        }
+
+        function loadPreset(idx) {
+            currentText = PRESETS[idx];
+            document.getElementById('customText').value = currentText;
+            prepareChunks();
+            reset();
+        }
+
+        function prepareChunks() {
+            const text = document.getElementById('customText').value.trim() || currentText;
+            const words = text.split(/\\s+/);
+            chunks = [];
+            
+            if (chunkMode === 'full') {
+                // Chunk by full sentences (split by . ! ?)
+                const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+                chunks = sentences.map(s => s.trim());
+            } else {
+                // Chunk by word size
+                const chunkSize = chunkMode === 'short' ? 3 : 5;
+                for (let i = 0; i < words.length; i += chunkSize) {
+                    chunks.push(words.slice(i, i + chunkSize).join(' '));
+                }
+            }
+        }
+
+        function renderCurrentChunk() {
+            if (chunks.length === 0 || currentIndex >= chunks.length) {
+                document.getElementById('simScreen').innerHTML = 'Haz clic en <span class="text-nbfcyan font-black">INICIAR</span>';
+                return;
+            }
+
+            let text = chunks[currentIndex];
+            
+            if (highlightEnabled) {
+                // Apply neurocognitive color highlights
+                text = text.replace(CLASSIFICATIONS.pronouns, match => `<span class="text-nbfcyan dark:text-nbfcyan">${match}</span>`);
+                text = text.replace(CLASSIFICATIONS.nouns, match => `<span class="text-nbfviolet dark:text-nbfviolet font-semibold">${match}</span>`);
+                text = text.replace(CLASSIFICATIONS.prepositions, match => `<span class="text-nbfemerald dark:text-nbfemerald font-medium">${match}</span>`);
+                text = text.replace(CLASSIFICATIONS.auxmodals, match => `<span class="text-nbfamber dark:text-nbfamber">${match}</span>`);
+            }
+
+            document.getElementById('simScreen').innerHTML = text;
+            
+            // Progress Bar
+            const percent = ((currentIndex + 1) / chunks.length) * 100;
+            document.getElementById('simProgress').style.width = `${percent}%`;
+        }
+
+        function togglePlay() {
+            if (isPlaying) {
+                pause();
+            } else {
+                play();
+            }
+        }
+
+        function play() {
+            prepareChunks();
+            if (currentIndex >= chunks.length) {
+                currentIndex = 0;
+            }
+            isPlaying = true;
+            document.getElementById('playBtn').innerHTML = '<i class="fa-solid fa-pause mr-2"></i> Pausar';
+            document.getElementById('playBtn').className = "w-full h-10 rounded-xl bg-nbfrose text-white font-bold text-sm shadow-lg shadow-nbfrose/20 hover:opacity-95 transition-all";
+            
+            // Calculate interval dynamically based on WPM and average words in chunk
+            const avgWordsPerChunk = chunkMode === 'short' ? 2.5 : chunkMode === 'medium' ? 4.5 : 8;
+            const msPerChunk = (avgWordsPerChunk / speed) * 60 * 1000;
+
+            playInterval = setInterval(() => {
+                currentIndex++;
+                if (currentIndex >= chunks.length) {
+                    pause();
+                    currentIndex = chunks.length - 1;
+                }
+                renderCurrentChunk();
+            }, msPerChunk);
+            
+            renderCurrentChunk();
+        }
+
+        function pause() {
+            isPlaying = false;
+            clearInterval(playInterval);
+            document.getElementById('playBtn').innerHTML = '<i class="fa-solid fa-play mr-2"></i> Reanudar';
+            document.getElementById('playBtn').className = "w-full h-10 rounded-xl bg-gradient-to-r from-nbfcyan to-nbfviolet text-white font-bold text-sm shadow-lg shadow-nbfcyan/20 hover:opacity-95 transition-all";
+        }
+
+        function reset() {
+            pause();
+            currentIndex = 0;
+            document.getElementById('simProgress').style.width = '0%';
+            renderCurrentChunk();
+        }
+
+        // Theme Switcher Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                themeIcon.className = "fa-solid fa-moon text-slate-800 text-lg";
+                themeToggleBtn.classList.add('bg-slate-100');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                themeIcon.className = "fa-solid fa-sun text-yellow-400 text-lg";
+                themeToggleBtn.classList.remove('bg-slate-100');
+            }
+        });
+
+        // Initialize Chunks
+        prepareChunks();
+    </script>
+</body>
+</html>
